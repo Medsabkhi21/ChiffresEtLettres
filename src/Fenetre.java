@@ -68,7 +68,7 @@ class LettersBtn implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		System.out.println("initiating Letters Game..");
-		FenetreL fen = new FenetreL();
+		ModeLettres fen = new ModeLettres();
 
 		
 		
