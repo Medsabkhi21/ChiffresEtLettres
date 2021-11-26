@@ -1,43 +1,102 @@
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import static java.lang.Math.floor;
+import static java.lang.Math.random;
 
 class ModeLettres extends JPanel {
 
-   
+
     private JButton valider;
     private JButton reinitialiser;
     private JLabel affichage, label1, label2;
     private Barre barre;
+    private JCheckBox Validate ;
+    private JLabel WhosTour;
+	private JLabel Jtour;
+	String p_name="Ali";
+    String[] lettresAlea = new String[10];
+    Player p1,p2;
+    int tour;
+	JLabel lab;
+	JPanel   RandomLettersPanelFull ;
+	JLabel labelScore2,labelScore1;
+
+    String RandomChar (){//random character generator
+	    Random random = new Random();
+	    int i =random.nextInt(26)+65;
+		String convertedChar = Character.toString((char)i);
+	    return convertedChar;}
+
+	    JPanel GenerateRandomLettersPanel(JPanel randomcharspanel){
+		for(int i = 0; i<11; i++)
+			randomcharspanel.add(new JLabel(RandomChar()));
+	return randomcharspanel;
+    }
+
+	void UpdateRandomLettersPanel(JPanel RandomLettersPanel){
+		for(Component label : RandomLettersPanel.getComponents()){
+			((JLabel) label).setText(RandomChar());
+		}}
+
+
+	 void GameEnd() {
+	System.out.println(Integer.parseInt(labelScore1.getText()));
+		String winner;
+//
+//		int s1=Integer.parseInt(labelScore1.getText());
+//		int s2=Integer.parseInt(labelScore2.getText());
+//		if(s1>s2){
+//			winner = p1.getName();
+//		}
+//		else if (s1<s2){
+//			winner =p2.getName();
+//		}
+//		else
+//			winner ="players! it's a draw";
+//
+//		JOptionPane.showMessageDialog(null, "Game Finished!\n Congrats"+winner);
+
+	}
+
 	ModeLettres(){
 		//BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 	       // frame.setLayout();
-
-	        Font fontTitre1 = new Font("Times new roman", Font.BOLD, 48);
+			Player p1 = new Player();
+			Player p2 = new Player();
+			p1.setName("ALi");
+			p2.setName("mohamed");
+			tour =1;
+			Font fontTitre1 = new Font("Times new roman", Font.BOLD, 48);
 	        Font fontTitre2 = new Font("Times new roman", Font.BOLD, 18);
 	        Font fontTitre3 = new Font("Times new roman", Font.BOLD, 20);
-
 	        label1 = new JLabel("Chiffres Et Lettres");
 	        label1.setFont(fontTitre1);
 	        label2 = new JLabel("Mode Lettres");
+	        WhosTour = new JLabel("¨Tour du joueur:"+p_name);
 	        label2.setFont(fontTitre2);
 	        label2.setForeground(new Color(128, 0, 128));
+			JLabel labelp1 = new JLabel(p1.Name);
+			JLabel labelp2 = new JLabel(p2.Name);
+			JLabel labelScore1 = new JLabel(Double.toString(p1.getScore()));
+			JLabel labelScore2 = new JLabel(Double.toString(p2.getScore()));
+			JLabel Jtour = new JLabel("Tour Number:"+floor(tour/2));
 
-	        JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
+
+
+			JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
 	        JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 3));
-	        JPanel pan0 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			JPanel scoring = new JPanel(new FlowLayout(FlowLayout.LEADING, 50, 3));
+
+			JPanel pan0 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			JPanel RandomLettersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	        JPanel pan1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 	        JPanel pan2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 	        JPanel pan3 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
@@ -46,134 +105,82 @@ class ModeLettres extends JPanel {
 	        barre = new Barre();
 	        panel1.add(label1);
 	        panel2.add(label2);
-	        ///
-	        valider = new JButton("Commencer");
+	        scoring.add(Jtour);
+	        scoring.add(labelp2);
+	        scoring.add(labelp2);
+	        scoring.add(labelScore1);
+			scoring.add(labelScore2);
+
+	        valider = new JButton("valider");
 	        reinitialiser = new JButton("Reinitialiser");
-	        affichage = new JLabel("");
+	        affichage = new JLabel("test");
 	        affichage.setFont(fontTitre2);
 	        affichage.setForeground(new Color(15, 5, 107));
 	        pan0.add(valider);
 	        pan0.add(reinitialiser);
-	        pan0.add(affichage);
+	        pan0.add(WhosTour);
+			JPanel RandomLettersPanelFull = GenerateRandomLettersPanel(RandomLettersPanel);
 
+
+			this.add(RandomLettersPanelFull);
 	        this.add(panel1);
 	        this.add(panel2);
 	        this.add(pan0);
-	        ///
-	       
-
-	
-	}
-}/*
-
-	Player player1 = new Player();
-	Player player2 = new Player();
-	JPanel pan = new JPanel();
-	JLabel welcome = new JLabel("Welcome to the game");
-	JLabel Player1 = new JLabel("Player 1 , Your Turn!");
-	JLabel Player2 = new JLabel("Player 2 , Your Turn!");
-	JTextField inputP1 = new JTextField(20);
+	        this.add(scoring);
+	        Validate = new JCheckBox("I swear this is a true word", true);  
+	        Validate.setBounds(100,150, 150,20);
 
 
-	JButton ValidateBtn = new JButton("validate");
-	JButton nextPlayerBtn = new JButton("Next Player");
 
-	int Tour = 4;
 
-	char RandomChar (){//random character generator
-	    Random random = new Random();
-	    char randomizedCharacter = (char) (random.nextInt(26) + 'a');
-	    return randomizedCharacter;}
-	 
+			JTextField field1 = new JTextField("enter word here");
+			pan1.add(field1);
+			this.add(RandomLettersPanel);
+			this.add(pan1);
+	        this.add(Validate);
 
-	String RandomizedString() {//random string generator
-		 Random random = new Random();
-		 String randomString="";
-		 int randomRange= random.nextInt(26) +4;
-		 for(int i =0; i<= randomRange; i++)
-			 randomString+=RandomChar();
-		 return  randomString;}
- 
-	void fctp1() {
-		String essay = inputP1.getText();
-		
-		int score1 =player1.calculateScore(essay);
-		System.out.println(" score :"+ String.valueOf(score1));
-		player1.storeScore(score1);
-		JLabel scoreLabel = new JLabel("hehe");
-		pan.add(scoreLabel);
-		}
-	void fctp2() {
 
-		Player1.setVisible(false);
-		inputP1.setVisible(false);
-		pan.add(Player2);
-		String Letters = RandomizedString();
-		JLabel LettersLabel = new JLabel(Letters);
-		pan.add(LettersLabel);
-		JTextField inputP1 = new JTextField(20);
-		pan.add(inputP1);
-		String essay2 = inputP1.getText();
-		int score2 =player2.calculateScore(essay2);
-		player2.storeScore(score2);
-		JLabel scoreLabel = new JLabel(String.valueOf(score2));
-		pan.add(scoreLabel);
-	}
-	public ModeLettres() {
+		valider.addActionListener(new ActionListener(){
 
-		this.setSize(1080,720);
-		this.setLocationRelativeTo(null);
-	
-
-		pan.setLayout(new FlowLayout());
-		pan.add(welcome);
-		
-		this.setContentPane(pan);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-	
-		//random String generating for player one and keeping score
-		int i =0;
-			while(i<Tour){
-			if (i % 2 == 0) {
-				String Letters = RandomizedString();
-				JLabel LettersLabel = new JLabel(Letters);
-				
-				pan.add(Player1);
-				pan.add(LettersLabel);
-				pan.add(inputP1);
-				pan.add(ValidateBtn);
-				
-				ValidateBtn.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						fctp1();
-						pan.add(nextPlayerBtn);
-					}});
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (floor(tour/2) == 7){
+				GameEnd();
 				}
-			
-			nextPlayerBtn.addActionListener(new ActionListener(){
 
-				@Override
-				public void actionPerformed(ActionEvent e) {
-		fctp2();
+				else if(Validate.isSelected()){
+					if(tour % 2 == 1){
+						p1.storeScore(p1.calculateScore(field1.getText()));
+						p_name=p2.Name;
+						labelScore1.setText(Double.toString(p1.getScore()));
+						scoring.revalidate();
+						scoring.repaint();
+						tour++;
+						Jtour.setText("Tour Number:"+floor(tour/2));
+
+						UpdateRandomLettersPanel(RandomLettersPanel);
+
+
+					}
+					else{
+						p2.storeScore(p2.calculateScore(field1.getText()));
+						labelScore2.setText(Double.toString(p2.getScore()));
+
+						p_name = p1.Name;
+						scoring.revalidate();
+						scoring.repaint();
+						tour++;
+						Jtour.setText("Tour Number:"+floor(tour/2));
+						UpdateRandomLettersPanel(RandomLettersPanel);
+					}
 				}
-			});
+				else{
+					JOptionPane.showMessageDialog(null, "please enter a real word");
+
+				}
+		}});
+
 	}
-	}}
 
 
-/*
-class Validate implements ActionListener{
-	public void actionPerformed(ActionEvent e) {
-
-		String essay = inputP1.getText();
-		
-		int score1 =player1.calculateScore(essay);
-		
-		player1.storeScore(score1);
-		JLabel scoreLabel = new JLabel(String.valueOf(score1));
-	pan.add(scoreLabel);
-	}	
-}*/
+}

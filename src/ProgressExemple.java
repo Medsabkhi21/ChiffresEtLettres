@@ -15,7 +15,7 @@ public class ProgressExemple extends Thread {
     JFrame f = new JFrame("Please wait");
     JProgressBar barre_progression = new JProgressBar();
     static final int MINIMUM = 0;
-    static final int MAXIMUM = 100;
+    static final int MAXIMUM = 150;
 
     public ProgressExemple() {
         this.f.add(this.barre_progression);
