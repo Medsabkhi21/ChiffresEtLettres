@@ -27,20 +27,22 @@ public class Controleur extends JFrame implements ActionListener {
 	JPanel pan;
 	Menu menu;
 	Barre barre;
-	Controleur() {
+	Player p1, p2;
+	Controleur( Player p1, Player p2) {
 		 super("Le plus long mot");
 	        menu = new Menu();
 	        barre = new Barre();
 	       // modechiffres = new ModeChiffres(dico);
-	      ModeLettres  ModeLettres = new ModeLettres();
+	    //  ModeLettres  ModeLettres = new ModeLettres();
 	        pan = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
-
+	        this.p1 = p1;
+	        this.p2 = p2;
 	        getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
 
 	        pan.add(barre);
 	        this.add(pan);
 	        this.add(menu);
-	        this.setPreferredSize(new Dimension(800, 650));
+	        this.setPreferredSize(new Dimension(500, 500));
 	        this.pack();
 	        this.setVisible(true);
 	        this.setResizable(false);
@@ -56,7 +58,6 @@ public class Controleur extends JFrame implements ActionListener {
 	        this.barre.getItemHelp().addActionListener(this);
 	        this.barre.getItemInformation().addActionListener(this);
 
-	        
 	
 	}
 	
@@ -65,9 +66,8 @@ public class Controleur extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == menu.getBoutonMJ()) {
-			System.out.println("test");
 			this.getContentPane().removeAll();
-			ModeLettres modeLettres = new ModeLettres();
+			ModeLettres modeLettres = new ModeLettres(p1,p2);
 			this.setContentPane(modeLettres);
 			
 			this.setVisible(true);	
@@ -75,9 +75,8 @@ public class Controleur extends JFrame implements ActionListener {
 			this.repaint();
 		}
 		if (e.getSource() == menu.getBoutonMO()) {
-			System.out.println("test");
 			this.getContentPane().removeAll();
-		//	ModeLettres modeChiffres = new ModeChiffres();
+			ModeChiffres modeChiffres = new ModeChiffres(p1,p2);
 			
 			this.setVisible(true);	
 			this.revalidate();

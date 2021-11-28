@@ -3,6 +3,7 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+/*
 
 class FenetreN extends JFrame{
 
@@ -21,3 +22,4 @@ class FenetreN extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		}}
+*/

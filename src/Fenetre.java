@@ -1,3 +1,4 @@
+/*
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -68,7 +69,7 @@ class LettersBtn implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		System.out.println("initiating Letters Game..");
-		ModeLettres fen = new ModeLettres();
+		ModeLettres fen = new ModeLettres(p1,p2);
 
 		
 		
@@ -81,3 +82,4 @@ public void actionPerformed(ActionEvent e) {
 	
 	
 }}
+*/
