@@ -77,7 +77,7 @@ public class Controleur extends JFrame implements ActionListener {
 		if (e.getSource() == menu.getBoutonMO()) {
 			this.getContentPane().removeAll();
 			ModeChiffres modeChiffres = new ModeChiffres(p1,p2);
-			
+			this.setContentPane(modeChiffres);
 			this.setVisible(true);	
 			this.revalidate();
 			this.repaint();

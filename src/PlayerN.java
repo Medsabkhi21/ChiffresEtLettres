@@ -13,7 +13,9 @@ public class PlayerN extends Player{
 
     public int calculateScore(int essay, int target){
         return 100-Math.abs(target-essay);}
+
     public void storeScore (int Score) {
         scores.add(Score);
     }
+
 }

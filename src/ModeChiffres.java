@@ -7,8 +7,8 @@ import java.util.Random;
 import static java.lang.Math.floor;
 
 public class ModeChiffres extends JPanel{
-    PlayerN p1;
-    PlayerN p2;
+    Player p1;
+    Player p2;
     int tour;
     String p_name;
     JLabel label1, label2, WhosTour;
@@ -19,7 +19,7 @@ public class ModeChiffres extends JPanel{
     public void UpdateRandomNumbersPanel(JPanel RandomNumbersPanel) {
         for (Component label : RandomNumbersPanel.getComponents()) {
            int number =GenerateRandomNumber();
-            ((JLabel) label).setText(String.valueOf(number));
+            ((JButton) label).setText(String.valueOf(number));
 
         }
     }
@@ -27,13 +27,13 @@ public class ModeChiffres extends JPanel{
     void GenerateRandomNumbersPanel(JPanel randomcharspanel) {
         for (int i = 0; i < 11; i++)
             randomcharspanel.add(
-                    new JLabel(String.valueOf(GenerateRandomNumber())));
+                    new JButton(String.valueOf(GenerateRandomNumber())));
 
     }
 
     ModeChiffres(Player pl1,Player pl2){
-        this.p1 =(PlayerN)pl1;
-        this.p2 =(PlayerN)pl2;
+        this.p1 = pl1;
+        this.p2 =pl2;
 
         tour =1;
         p_name =p1.getName();
@@ -46,7 +46,7 @@ public class ModeChiffres extends JPanel{
         label2 = new JLabel("Mode Chiffres");
         WhosTour = new JLabel("¨Tour du joueur: "+p_name);
         label2.setFont(fontTitre2);
-        label2.setForeground(new Color(128, 0, 120));
+        label2.setForeground(new Color(128, 0, 120, 0));
 
         JLabel labelp1 = new JLabel(p1.Name);
         JLabel labelp2 = new JLabel(p2.Name);
@@ -80,14 +80,14 @@ public class ModeChiffres extends JPanel{
         reinitialiser = new JButton("Reinitialiser");
 
         pan0.add(WhosTour);
-        JPanel RandomLettersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel RandomNumbersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
 
 
 
 
 
-        this.add(RandomLettersPanel);
+        this.add(RandomNumbersPanel);
 
         this.add(panel1);
         this.add(panel2);
@@ -103,7 +103,7 @@ public class ModeChiffres extends JPanel{
         pan1.add(field1);
         pan1.add(valider);
         pan1.add(reinitialiser);
-        this.add(RandomLettersPanel);
+        this.add(RandomNumbersPanel);
         this.add(pan1);
 
 
@@ -117,18 +117,18 @@ public class ModeChiffres extends JPanel{
 
 
                     if(tour % 2 == 1){
-                        p1.storeScore(p1.calculateScore(field1.getText().toUpperCase(),RandomLettersPanel));
+                        p1.storeScore(((PlayerN)p1).calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
                         p_name=p2.Name;
                         labelScore1.setText(Double.toString(p1.getScore()));
                         scoring.revalidate();
                         scoring.repaint();
                         tour++;
                         Jtour.setText("Tour Number:"+floor(tour/2));
-                        UpdateRandomNumbersPanel(RandomLettersPanel);
+                        UpdateRandomNumbersPanel(RandomNumbersPanel);
 
                     }
                     else{
-                        p2.storeScore(p2.calculateScore(field1.getText().toUpperCase(),RandomLettersPanel));
+                        p2.storeScore(((PlayerN)p2).calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
                         labelScore2.setText(Double.toString(p2.getScore()));
 
                         p_name = p1.Name;
@@ -136,7 +136,7 @@ public class ModeChiffres extends JPanel{
                         scoring.repaint();
                         tour++;
                         Jtour.setText("Tour Number:"+floor(tour/2));
-                        UpdateRandomNumbersPanel(RandomLettersPanel);
+                        UpdateRandomNumbersPanel(RandomNumbersPanel);
                     }
                 }
 

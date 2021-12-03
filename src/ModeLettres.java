@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import static java.lang.Math.floor;
@@ -148,6 +149,7 @@ public class ModeLettres extends JPanel {
 						scoring.repaint();
 						tour++;
 						Jtour.setText("Tour Number:"+floor(tour/2));
+						/// to do : update current player name
 						UpdateRandomLettersPanel(RandomLettersPanel);
 
 					}
