@@ -81,13 +81,7 @@ public class ModeChiffres extends JPanel{
 
         pan0.add(WhosTour);
         JPanel RandomNumbersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-
-
-
-
-
-        this.add(RandomNumbersPanel);
+        GenerateRandomNumbersPanel(RandomNumbersPanel);
 
         this.add(panel1);
         this.add(panel2);
@@ -117,7 +111,7 @@ public class ModeChiffres extends JPanel{
 
 
                     if(tour % 2 == 1){
-                        p1.storeScore(((PlayerN)p1).calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
+                        p1.storeScore(p1.calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
                         p_name=p2.Name;
                         labelScore1.setText(Double.toString(p1.getScore()));
                         scoring.revalidate();
@@ -128,7 +122,7 @@ public class ModeChiffres extends JPanel{
 
                     }
                     else{
-                        p2.storeScore(((PlayerN)p2).calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
+                        p2.storeScore((p2).calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
                         labelScore2.setText(Double.toString(p2.getScore()));
 
                         p_name = p1.Name;
@@ -166,9 +160,9 @@ public class ModeChiffres extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("RAZ");
-                p1= (PlayerN)((Player)p1).RAZscore();
+                p1= p1.RAZscore();
                 System.out.println("scoreee"+p1.getScore());
-                p2= (PlayerN)((Player)p2).RAZscore();
+                p2= p2.RAZscore();
                 tour =0;
                 Jtour.setText("Tour Number:"+floor(tour/2));
                 labelScore1.setText(Double.toString(p1.getScore()));

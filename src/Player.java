@@ -43,21 +43,23 @@ public void storeScore (int Score) {
 		System.out.println("done");
 		return this;	}
 
-Player(String name){
+	public void setName(String name) {
+		Name = name;
+	}
+	public String getName() {
+		return Name;
+	}
+
+	public int calculateScoreN(int essay, int target){
+		return 100-Math.abs(target-essay);}
+
+	Player(String name){
 	try{
 		this.Name = name;
 	scores.add(0); }catch(Exception e ){
 		e.printStackTrace();
 	}
-}
-
-	public void setName(String name) {
-		Name = name;
-	}
-
-	public String getName() {
-		return Name;
-	}}
+}}
 
 
 
