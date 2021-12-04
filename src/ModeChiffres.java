@@ -11,24 +11,26 @@ public class ModeChiffres extends JPanel{
     Player p2;
     int tour;
     String p_name;
-    JLabel label1, label2, WhosTour;
+    JLabel label1, label2, WhosTour,Jsum, JTarget;
     JButton reinitialiser,valider;
+    JPanel RandomNumbersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
    public int GenerateRandomNumber(){return ((int) Math.random()*100);};
 
     public void UpdateRandomNumbersPanel(JPanel RandomNumbersPanel) {
         for (Component label : RandomNumbersPanel.getComponents()) {
            int number =GenerateRandomNumber();
+           System.out.println("number generated:" + number);
             ((JButton) label).setText(String.valueOf(number));
 
         }
     }
 
-    void GenerateRandomNumbersPanel(JPanel randomcharspanel) {
+    JPanel GenerateRandomNumbersPanel(JPanel randomcharspanel) {
         for (int i = 0; i < 11; i++)
             randomcharspanel.add(
                     new JButton(String.valueOf(GenerateRandomNumber())));
-
+    return randomcharspanel;
     }
 
     ModeChiffres(Player pl1,Player pl2){
@@ -80,13 +82,13 @@ public class ModeChiffres extends JPanel{
         reinitialiser = new JButton("Reinitialiser");
 
         pan0.add(WhosTour);
-        JPanel RandomNumbersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        GenerateRandomNumbersPanel(RandomNumbersPanel);
+
+        RandomNumbersPanel=GenerateRandomNumbersPanel(RandomNumbersPanel);
 
         this.add(panel1);
         this.add(panel2);
         this.add(scoring);
-
+        this.add(RandomNumbersPanel);
         this.add(pan0);
 
 
@@ -109,9 +111,9 @@ public class ModeChiffres extends JPanel{
                     this.GameEnd();
                 }
 
-
+                Jsum=ResultofEssay();
                     if(tour % 2 == 1){
-                        p1.storeScore(p1.calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
+                        p1.storeScore(p1.calculateScoreN(Integer.parseInt(Jsum.getText()),Integer.parseInt((JTarget.getText()))));
                         p_name=p2.Name;
                         labelScore1.setText(Double.toString(p1.getScore()));
                         scoring.revalidate();
@@ -122,7 +124,7 @@ public class ModeChiffres extends JPanel{
 
                     }
                     else{
-                        p2.storeScore((p2).calculateScore(field1.getText().toUpperCase(),RandomNumbersPanel));
+                        p2.storeScore(p2.calculateScoreN(Integer.parseInt(Jsum.getText()),Integer.parseInt((JTarget.getText()))));
                         labelScore2.setText(Double.toString(p2.getScore()));
 
                         p_name = p1.Name;
