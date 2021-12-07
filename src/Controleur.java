@@ -42,7 +42,7 @@ public class Controleur extends JFrame implements ActionListener {
 	        pan.add(barre);
 	        this.add(pan);
 	        this.add(menu);
-	        this.setPreferredSize(new Dimension(500, 500));
+	        this.setPreferredSize(new Dimension(700, 500));
 	        this.pack();
 	        this.setVisible(true);
 	        this.setResizable(false);
