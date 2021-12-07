@@ -5,10 +5,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Player {
 String Name;
-ArrayList<Integer> scores =new ArrayList<Integer>(3);
+ArrayList<Double> scores =new ArrayList<Double>(3);
 
 
-public int calculateScore(String essay, JPanel RandomCharPanel) {
+public double calculateScore(String essay, JPanel RandomCharPanel) {
 	int score = 0;
 	for (Component label : RandomCharPanel.getComponents()) {
 		String LabelText = ((JLabel) label).getText();
@@ -19,10 +19,10 @@ public int calculateScore(String essay, JPanel RandomCharPanel) {
 				essay = essay.substring(0, essay.indexOf(Labelchar) ) + essay.substring(essay.indexOf(Labelchar) +1);
 				score++;}
 		}
-	}	 return score;
+	}	 return (double) score;
 }
 
-public void storeScore (int Score) {
+public void storeScore (double Score) {
 	scores.add(Score);
 }
 
@@ -34,12 +34,10 @@ public void storeScore (int Score) {
 	 return sum;
 	 }
 
-	public int getLastScore(){
-		return scores.get(scores.size() - 1);
-	}
+
 	Player RAZscore (){
-		this.scores =new ArrayList<Integer>(3);
-		this.scores.add(0);
+		this.scores =new ArrayList<Double>(3);
+		this.scores.add(0.0);
 		System.out.println("done");
 		return this;	}
 
@@ -50,13 +48,13 @@ public void storeScore (int Score) {
 		return Name;
 	}
 
-	public int calculateScoreN(int essay, int target){
+	public double calculateScoreN(double essay, double target){
 		return 100-Math.abs(target-essay);}
 
 	Player(String name){
 	try{
 		this.Name = name;
-	scores.add(0); }catch(Exception e ){
+	scores.add(0.0); }catch(Exception e ){
 		e.printStackTrace();
 	}
 }}
