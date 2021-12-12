@@ -28,6 +28,8 @@ public class Barre extends JMenuBar {
         this.add(Aide);
     }
 
+
+    //setters and getters for Barre attributes
     JMenu getMenuJouer() {
         return this.Jouer;
     }

@@ -4,5 +4,5 @@ public class Progression extends Programme {
 
     public void run() {
         new ProgressExemple();
-    }
+    } //run the progressexample in java
 }

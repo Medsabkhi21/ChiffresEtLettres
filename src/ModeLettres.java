@@ -33,13 +33,13 @@ public class ModeLettres extends JPanel {
 		return convertedChar;
 	}
 
-	void GenerateRandomLettersPanel(JPanel randomcharspanel) {
+	void GenerateRandomLettersPanel(JPanel randomcharspanel) { //generate a panel with random characters
 		for (int i = 0; i < 11; i++)
 			randomcharspanel.add(new JLabel(RandomChar()));
 
 	}
 
-	public void UpdateRandomLettersPanel(JPanel RandomLettersPanel) {
+	public void UpdateRandomLettersPanel(JPanel RandomLettersPanel) { //updating panel with other random characters
 		for (Component label : RandomLettersPanel.getComponents()) {
 			((JLabel) label).setText(RandomChar());
 		}
@@ -47,17 +47,18 @@ public class ModeLettres extends JPanel {
 
 	public JPanel getRandomLettersPanelFull() {
 		return RandomLettersPanelFull;
-	}
+	} //getter for randomletterspanelfull
 
 
 	ModeLettres(Player pl1, Player pl2) {
-		//BoxLayout layout = new BoxLayout(this, BoxLayout.Y_AXIS);
-	       // frame.setLayout();
+		//we link each plauer to its name and score
 			this.p1= pl1;
 			this.p2 = pl2;
+			//we start tour and get the name of the first player
 			tour =1;
 			p_name =p1.getName();
 
+			//create the layout of mode letters game
 			Font fontTitre1 = new Font("Times new roman", Font.BOLD, 48);
 	        Font fontTitre2 = new Font("Times new roman", Font.BOLD, 18);
 	        Font fontTitre3 = new Font("Times new roman", Font.BOLD, 20);
@@ -68,15 +69,11 @@ public class ModeLettres extends JPanel {
 	        label2.setFont(fontTitre2);
 	        label2.setForeground(new Color(128, 0, 120));
 
-				JLabel labelp1 = new JLabel(p1.Name);
-				JLabel labelp2 = new JLabel(p2.Name);
-
-				JLabel labelScore1 = new JLabel(Double.toString(p1.getScore()));
-				JLabel labelScore2 = new JLabel(Double.toString(p2.getScore()));
-
-				JLabel Jtour = new JLabel("Tour Number:"+floor(tour/2));
-
-
+	        JLabel labelp1 = new JLabel(p1.Name);
+			JLabel labelp2 = new JLabel(p2.Name);
+			JLabel labelScore1 = new JLabel(Double.toString(p1.getScore()));
+			JLabel labelScore2 = new JLabel(Double.toString(p2.getScore()));
+			JLabel Jtour = new JLabel("Tour Number:"+floor(tour/2)); // print tour
 
 			JPanel panel1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 0));
 	        JPanel panel2 = new JPanel(new FlowLayout(FlowLayout.CENTER, 50, 3));
@@ -85,6 +82,7 @@ public class ModeLettres extends JPanel {
 			JPanel pan0 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 	        JPanel pan1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 
+	        //add items to the panel
 	        Barre barre = new Barre();
 	        this.add(barre);
 	        panel1.add(label1);
@@ -95,53 +93,49 @@ public class ModeLettres extends JPanel {
 	        scoring.add(labelScore1);
 	        scoring.add(labelp2);
 			scoring.add(labelScore2);
-
-	        valider = new JButton("valider");
+			valider = new JButton("valider");
 	        reinitialiser = new JButton("Reinitialiser");
 	        affichage = new JLabel("test");
 	        affichage.setFont(fontTitre2);
 	        affichage.setForeground(new Color(15, 5, 107));
-
 	        pan0.add(WhosTour);
-			JPanel RandomLettersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
 
+	        //generate random letters panel
+	        JPanel RandomLettersPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		 	GenerateRandomLettersPanel(RandomLettersPanel);
 
-
-
 		this.add(RandomLettersPanel);
-
 		this.add(panel1);
 		this.add(panel2);
 		this.add(scoring);
+		this.add(pan0);
 
-	        this.add(pan0);
-	        Validate = new JCheckBox("I swear this is a true word", true);
-	        Validate.setBounds(100,150, 150,20);
+		Validate = new JCheckBox("I swear this is a true word", true);
+	    Validate.setBounds(100,150, 150,20);
+	    JTextField field1 = new JTextField("enter word here");
+	    pan1.add(field1);
+		pan1.add(Validate);
+		pan1.add(valider);
+		pan1.add(reinitialiser);
 
-
-
-
-			JTextField field1 = new JTextField("enter word here");
-			pan1.add(field1);
-			pan1.add(Validate);
-			pan1.add(valider);
-			pan1.add(reinitialiser);
-			this.add(RandomLettersPanel);
-			this.add(pan1);
+		//add panels to the mother jpanel: mode lettres
+		this.add(RandomLettersPanel);
+		this.add(pan1);
 
 
+		//on valider button click,
 		valider.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (floor(tour/2) == 3){
-				this.GameEnd();
+					//we see if number of tours is over, if it is we end the game
+					this.GameEnd();
 				}
 
-				else if(Validate.isSelected()){
-					if(tour % 2 == 1){
+				else if(Validate.isSelected()){ // we check if its a true word
+					if(tour % 2 == 1){// if its second player's tour we calculate his store and save it , increment the tour and update our jpanel elements
 						p1.storeScore(p1.calculateScore(field1.getText().toUpperCase(),RandomLettersPanel));
 						p_name=p2.Name;
 						labelScore1.setText(Double.toString(p1.getScore()));
@@ -153,7 +147,7 @@ public class ModeLettres extends JPanel {
 						UpdateRandomLettersPanel(RandomLettersPanel);
 
 					}
-					else{
+					else{ // if its first player's tour we do the same as for player two
 						p2.storeScore(p2.calculateScore(field1.getText().toUpperCase(),RandomLettersPanel));
 						labelScore2.setText(Double.toString(p2.getScore()));
 
@@ -166,13 +160,14 @@ public class ModeLettres extends JPanel {
 					}
 				}
 				else{
-					JOptionPane.showMessageDialog(null, "please enter a real word");
+					JOptionPane.showMessageDialog(null, "please enter a real word"); // if it's not a true word we pop a message to tell him to input a true word
 
 				}
 			}
 
 
 				private void GameEnd() {
+				//in ending the game we show a screen message that tell us who won
 				String winner;
 
 				float s1=Float.parseFloat(labelScore1.getText());
@@ -192,6 +187,7 @@ public class ModeLettres extends JPanel {
 		});
 
 		reinitialiser.addActionListener(new ActionListener() {
+			// remise a zero of scores for both players as well as tour
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("RAZ");
