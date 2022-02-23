@@ -1,5 +1,5 @@
 <h2>Project: Chiffres & Lettres</h2>
-<h2>Student: Mohamed Sabkhi</h2>
+<h3>Student: Mohamed Sabkhi</h3>
 
 Application start up screen:
 
